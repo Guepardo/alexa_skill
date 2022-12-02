@@ -1,5 +1,5 @@
+from utils import shell
 import socketio
-
 class Client:
     def __init__(self):
         self.socket = socketio.Client()
@@ -13,6 +13,8 @@ class Client:
         self.socket.on('new_task', handler=self.on_new_task)
 
     def on_new_task(self, data):
+        shell('notify-send -t 0 "Alexa"')
+
         print("New Task")
         print(data)
 
