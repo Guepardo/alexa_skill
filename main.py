@@ -2,10 +2,9 @@ import sys
 from server import Server
 from client import Client
 
-server = Server()
-server.run()
+start_mode = sys.argv[1]
 
-start_mode = sys.agv[1]
+print(sys.argv)
 
 if "__main__" == __name__:
     if start_mode == 'server':
