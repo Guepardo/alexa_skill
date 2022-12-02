@@ -30,4 +30,4 @@ class Server:
         print('Client disconnected')
 
     def run(self):
-        self.socketio.run(self.app, host='0.0.0.0')
+        self.socketio.run(self.app, host='0.0.0.0', debug=True)

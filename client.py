@@ -5,7 +5,7 @@ class Client:
         self.socket = socketio.Client()
         self.register_socket_events()
 
-        self.socket.connect("http://localhost:5000")
+        self.socket.connect("https://alexa.pokefat.ml")
 
     def register_socket_events(self):
         self.socket.on('connect', handler=self.on_connect)
@@ -13,9 +13,7 @@ class Client:
         self.socket.on('new_task', handler=self.on_new_task)
 
     def on_new_task(self, data):
-        shell('notify-send -t 0 "Alexa"')
-
-        print("New Task")
+        shell('notify-send -t 0 "Alexa: Poooong"')
         print(data)
 
     def on_connect(self):
