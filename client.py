@@ -1,7 +1,9 @@
 from utils import shell
-from commands.open_chrome import OpenChrome
+from commands.locator import Locator
 
 import socketio
+
+
 class Client:
     def __init__(self):
         self.socket = socketio.Client()
@@ -15,9 +17,17 @@ class Client:
         self.socket.on('new_task', handler=self.on_new_task)
 
     def on_new_task(self, data):
-        print(data)
-        shell('notify-send -t 0 "Alexa: Poooong"')
-        OpenChrome().execute()
+        locator = Locator()
+
+        kind = data['kind']
+        command_number = data['command_number']
+
+        command = locator.find(command_number)
+
+        command.execute()
+
+        shell(
+            f"""notify-send -t 0 "Alexa: kind: {kind}, command number: {command_number}" """)
 
     def on_connect(self):
         print("Connected")
