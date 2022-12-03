@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
-
+from flask import request
 
 class Server:
     def __init__(self):
@@ -13,10 +13,11 @@ class Server:
 
     def register_views(self):
         self.app.add_url_rule("/tasks", "handle_create_task",
-                              self.handle_create_task, methods=['POST'])
+                              view_func=self.handle_create_task, methods=['POST'])
 
-    def handle_create_task(self, data=None,):
-        self.socketio.emit('new_task', {'data': data})
+    def handle_create_task(self):
+        print(request.json)
+        self.socketio.emit('new_task', request.json)
         return '', 204
 
     def register_socket_events(self):

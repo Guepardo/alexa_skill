@@ -1,4 +1,6 @@
 from utils import shell
+from commands.open_chrome import OpenChrome
+
 import socketio
 class Client:
     def __init__(self):
@@ -13,8 +15,9 @@ class Client:
         self.socket.on('new_task', handler=self.on_new_task)
 
     def on_new_task(self, data):
-        shell('notify-send -t 0 "Alexa: Poooong"')
         print(data)
+        shell('notify-send -t 0 "Alexa: Poooong"')
+        OpenChrome().execute()
 
     def on_connect(self):
         print("Connected")
